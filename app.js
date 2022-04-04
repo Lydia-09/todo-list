@@ -29,6 +29,7 @@ const port = 3000
 app.get('/', (req, res) => {
     Todo.find()
         .lean()
+        .sort({ _id: 'asc' })
         .then(todos => res.render('index', { todos }))
         .catch(error => console.error(error))
 })
