@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const exphbs = require("express-handlebars")
 
 const app = express()
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true})
@@ -14,10 +15,13 @@ db.on('open', () => {
     console.log('mongodb connected!')
 })
 
+app.engine('hbs', exphbs( { defaultLayout: 'main', extname: '.hbs' }))
+app.set('view engine', 'hbs')
+
 const port = 3000
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.render('index')
 })
 
 app.listen(port, () => {
