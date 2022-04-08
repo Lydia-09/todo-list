@@ -19,6 +19,7 @@ router.post('/register', (req, res) => {
     User.findOne({ email }).then(user => {
         if(user) {
             console.log('User already exits.')
+            console.log( req.body )
             res.render('register', {
                 name,
                 email,
